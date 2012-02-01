@@ -1,0 +1,17 @@
+.bundle
+db/*.sqlite3
+log/*
+tmp
+tmp/**/*
+.#*
+*~
++*.swp
+**/*.bak
+*.sw*
+*.vim
+*.sql
+**/*.sw*
+**/*.orig
+.DS_Store
+tags
+.rvmrc
