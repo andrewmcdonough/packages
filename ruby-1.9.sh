@@ -5,7 +5,7 @@
 
 set -e
 
-VERSION="1.9.3-p0"
+VERSION="1.9.3-p125"
 USER_VERSION="-ts1"
 
 mkdir -p build
@@ -18,16 +18,6 @@ if [ ! -d ruby-${VERSION} ]; then
 fi
 
 cd ruby-${VERSION}
-
-if [ ! -f 47.diff ]; then
-  wget https://github.com/ruby/ruby/pull/47.diff
-fi
-patch -p1 --forward < 47.diff || echo "Already applied"
-
-if [ ! -f cumulative_performance.patch ]; then
-  wget https://raw.github.com/gist/1658360/2eee5541435663deddd674617bf26ae645b015bd/cumulative_performance.patch
-fi
-patch -p1 --forward < cumulative_performance.patch || echo "Already applied"
 
 ./configure \
   --prefix=/usr \
