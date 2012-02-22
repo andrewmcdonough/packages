@@ -3,7 +3,7 @@
 # Shamelessly yoinked from http://github.com/alphagov/packages
 
 set -e
-DISTRIBUTIONS="current"
+DISTRIBUTIONS="lucid-tribesports"
 COMPONENTS="main"
 ARCHITECTURES="amd64 i386"
 
