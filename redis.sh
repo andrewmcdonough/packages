@@ -18,12 +18,6 @@ cd redis-${VERSION}
 make
 
 # Redis's Makefile doesn't respect DESTDIR, so do all this copying manually:
-PRGNAME='redis-server'
-BENCHPRGNAME='redis-benchmark'
-CLIPRGNAME='redis-cli'
-CHECKDUMPPRGNAME='redis-check-dump'
-CHECKAOFPRGNAME='redis-check-aof'
-
 INSTALLDIR=installdir
 BIN_DIR=$INSTALLDIR/usr/local/bin
 CONF_DIR=$INSTALLDIR/etc/redis
@@ -31,14 +25,15 @@ INIT_DIR=$INSTALLDIR/etc/init.d
 
 mkdir -p $BIN_DIR $CONF_DIR $INIT_DIR
 
-for file in $PRGNAME $BENCHPRGNAME $CLIPRGNAME $CHECKDUMPPRGNAME $CHECKAOFPRGNAME; do
-  cp -pf src/$file $BIN_DIR/
+for prog in server benchmark cli check-dump check-aof; do
+  cp -pf src/redis-${prog} $BIN_DIR/
 done
 
 cp -pf redis.conf $CONF_DIR/
 
 fpm -s dir -t deb -n ts-redis --provides redis-server --conflicts redis-server \
   -v ${VERSION}${USER_VERSION} -p redis-server-VERSION_ARCH.deb -C $INSTALLDIR \
+  -d 'libc6 (>= 2.7)' \
   usr/local/bin etc/redis
 
 mkdir -p ../../debs
