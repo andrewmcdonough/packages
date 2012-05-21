@@ -28,3 +28,18 @@ New Packages
 ------------
 
 Cargo-cult an existing script. Note that most of the scripts rely on the source package's `make install` command responding to the `DESTDIR` environment variable. If building a package that does not, you may have to manually copy things into a suitable location for `fpm` (see `redis.sh` for an example).
+
+Using the repo
+--------------
+
+You will need the public key as above, and must tell `apt` about it thusly:
+
+    $ sudo apt-key add tribesports-pubkey.asc
+
+Then add the repo to your sources:
+
+    deb http://s3-eu-west-1.amazonaws.com/tribesports-packages/ lucid-tribesports main
+
+Finally, update apt:
+
+    $ sudo apt-get update
