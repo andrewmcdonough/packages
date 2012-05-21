@@ -1,7 +1,7 @@
 Tribesports Package & Repository Management
 ===========================================
 
-This repo contains scripts to build various Tribesports dependencies, create .deb packages from them using [fpm](https://github.com/jordansissel/fpm), build a signed apt repository and upload it to S3. Bits of it are lifted wholesale from the [alphagov packages repo](https://github.com/alphagov/packages).
+This repo contains scripts to build various Tribesports dependencies, create .deb packages from them using [fpm](https://github.com/jordansissel/fpm), build a signed apt repository and upload it to S3. Bits of it are lifted wholesale from the [alphagov packages repo](https://github.com/alphagov/packages). All hail Government Digital Services.
 
 Requirements
 ------------
