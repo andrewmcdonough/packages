@@ -32,7 +32,7 @@ INIT_DIR=$INSTALLDIR/etc/init.d
 mkdir -p $BIN_DIR $CONF_DIR $INIT_DIR
 
 for file in $PRGNAME $BENCHPRGNAME $CLIPRGNAME $CHECKDUMPPRGNAME $CHECKAOFPRGNAME; do
-  cp -pf $file $BIN_DIR/
+  cp -pf src/$file $BIN_DIR/
 done
 
 cp -pf redis.conf $CONF_DIR/
