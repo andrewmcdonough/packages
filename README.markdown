@@ -38,7 +38,7 @@ You will need the public key as above, and must tell `apt` about it thusly:
 
 Then add the repo to your sources:
 
-    deb http://s3-eu-west-1.amazonaws.com/tribesports-packages/ lucid-tribesports main
+    deb http://packages.tribesports.com/ubuntu lucid-tribesports main
 
 Finally, update apt:
 

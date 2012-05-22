@@ -3,7 +3,7 @@
 
 set -e
 mkdir -p debs.new
-s3cmd/s3cmd -c s3cfg-tribesports sync s3://tribesports-packages/ubuntu/pool/ debs.new/
+s3cmd/s3cmd -c s3cfg-tribesports sync s3://packages.tribesports.com/ubuntu/pool/ debs.new/
 cp debs/* debs.new
 rm -rf debs
 mv debs.new debs
