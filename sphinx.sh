@@ -31,7 +31,7 @@ installdir=`cd installdir && pwd`
 make
 make install DESTDIR=$installdir
 
-fpm -s dir -t deb -n sphinx -v ${VERSION}${USER_VERSION} -C $installdir \
+fpm -s dir -t deb -n ts-sphinx -v ${VERSION}${USER_VERSION} -C $installdir \
   -p sphinx-VERSION_ARCH.deb -d "libmysqlclient-dev" \
   -d "libc6 (>= 2.6)" \
   usr/bin usr/etc usr/var
