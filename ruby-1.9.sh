@@ -25,7 +25,8 @@ cd ruby-${VERSION}
 make
 make install DESTDIR=installdir
 
-fpm -s dir -t deb -n ruby -v ${VERSION}${USER_VERSION} -C installdir \
+fpm -s dir -t deb -n ts-ruby -v ${VERSION}${USER_VERSION} -C installdir \
+  --provides ruby --conflicts ruby \
   -p ruby-VERSION_ARCH.deb -d "libstdc++6 (>= 4.4.3)" \
   -d "libc6 (>= 2.6)" -d "libffi5 (>= 3.0.4)" -d "libgdbm3 (>= 1.8.3)" \
   -d "libncurses5 (>= 5.7)" -d "libreadline6 (>= 6.1)" \
