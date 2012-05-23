@@ -15,10 +15,11 @@ fi
 
 cd memcached-${VERSION}
 
-./configure --prefix=/usr/local
+./configure --prefix=/usr
+
 make
 make install DESTDIR=installdir
-scripts_dir=installdir/usr/local/share/memcached
+scripts_dir=installdir/usr/share/memcached/scripts
 mkdir -p ${scripts_dir}
 cp -pf scripts/{memcached-tool,start-memcached,memcached-init} ${scripts_dir}/
 
@@ -26,7 +27,7 @@ fpm -s dir -t deb -n ts-memcached -v ${VERSION}${USER_VERSION} -C installdir \
   --provides memcached --conflicts memcached \
   -p memcached-VERSION_ARCH.deb -d 'libc6 (>= 2.6)' \
   -d 'libevent-1.4-2 (>= 1.4.13-stable)' -d 'perl' -d 'lsb-base (>= 3.2-13)' \
-  usr/local/bin usr/local/include usr/local/share
+  usr/bin usr/include usr/share
 
 mkdir -p ../../debs
 mv *.deb ../../debs/
