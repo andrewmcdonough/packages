@@ -69,6 +69,7 @@ fpm \
   -s dir \
   -t deb \
   -n ts-solr \
+  -p solr-VERSION_ARCH.deb \
   -v $VERSION${USER_VERSION} \
   -C installdir \
   -a all \
