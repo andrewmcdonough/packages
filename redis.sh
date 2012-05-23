@@ -2,7 +2,7 @@
 
 set -e
 
-VERSION='2.4.13'
+VERSION='2.4.14'
 USER_VERSION='-ts1'
 
 mkdir -p build
@@ -19,7 +19,7 @@ make
 
 # Redis's Makefile doesn't respect DESTDIR, so do all this copying manually:
 INSTALLDIR=installdir
-BIN_DIR=$INSTALLDIR/usr/local/bin
+BIN_DIR=$INSTALLDIR/usr/bin
 CONF_DIR=$INSTALLDIR/etc/redis
 INIT_DIR=$INSTALLDIR/etc/init.d
 
@@ -34,7 +34,7 @@ cp -pf redis.conf $CONF_DIR/
 fpm -s dir -t deb -n ts-redis --provides redis-server --conflicts redis-server \
   -v ${VERSION}${USER_VERSION} -p redis-server-VERSION_ARCH.deb -C $INSTALLDIR \
   -d 'libc6 (>= 2.7)' \
-  usr/local/bin etc/redis
+  usr/bin etc/redis
 
 mkdir -p ../../debs
 mv *.deb ../../debs/
