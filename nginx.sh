@@ -56,7 +56,7 @@ fpm -s dir -t deb -n ts-nginx -v ${VERSION}${USER_VERSION} -C installdir \
   -d "libpcre3 (>= 7.7)" -d "libssl0.9.8 (>= 0.9.8k-1)" \
   -d "libxml2 (>= 2.7.4)" -d "libxslt1.1 (>= 1.1.18)" \
   -d "zlib1g (>= 1:1.1.4)" \
-  etc/nginx var
+  etc/nginx var usr/sbin
 
 mkdir -p ../../debs
 mv *.deb ../../debs/
