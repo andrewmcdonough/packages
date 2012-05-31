@@ -14,7 +14,7 @@ cd build
 # requires build-essential libssl-dev libreadline6-dev zlib1g-dev libyaml-dev libyaml-0-2
 if [ ! -d ruby-${VERSION} ]; then
   wget http://ftp.ruby-lang.org/pub/ruby/1.9/ruby-${VERSION}.tar.gz
-  tar -zxvf ruby-${VERSION}.tar.gz
+  tar zxvf ruby-${VERSION}.tar.gz
 fi
 
 cd ruby-${VERSION}
