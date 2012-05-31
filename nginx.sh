@@ -19,6 +19,7 @@ cd nginx-${VERSION}
 
 ./configure \
   --prefix=/etc/nginx  \
+  --sbin-path=/usr/sbin \
   --conf-path=/etc/nginx/nginx.conf  \
   --error-log-path=/var/log/nginx/error.log  \
   --http-client-body-temp-path=/var/lib/nginx/body  \
