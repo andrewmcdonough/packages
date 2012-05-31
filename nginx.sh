@@ -48,6 +48,7 @@ cd nginx-${VERSION}
 
 make
 make install DESTDIR=installdir
+mkdir -p installdir/var/lib/nginx
 
 fpm -s dir -t deb -n ts-nginx -v ${VERSION}${USER_VERSION} -C installdir \
   --provides nginx --conflicts nginx \
