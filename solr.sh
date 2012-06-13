@@ -61,6 +61,10 @@ java.util.logging.FileHandler.level = ALL
 java.util.logging.FileHandler.formatter = java.util.logging.SimpleFormatter
 END
 
+cat > preinstall_script <<END
+adduser --system --group --no-create-home --disabled-password --disabled-login solr
+END
+
 for f in lib etc webapps start.jar; do
   cp -R example/$f installdir/opt/solr/
 done
@@ -74,6 +78,7 @@ fpm \
   -C installdir \
   -a all \
   -d java6-runtime-headless \
+  --pre-install build/preinstall_script \
   opt/solr var/solr etc/solr etc/init
 
 mkdir -p ../../debs
