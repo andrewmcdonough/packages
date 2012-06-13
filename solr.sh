@@ -78,7 +78,7 @@ fpm \
   -C installdir \
   -a all \
   -d java6-runtime-headless \
-  --pre-install build/preinstall_script \
+  --pre-install preinstall_script \
   opt/solr var/solr etc/solr etc/init
 
 mkdir -p ../../debs
