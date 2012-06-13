@@ -75,7 +75,7 @@ fpm \
   -d java6-runtime-headless \
   --pre-install preinstall_script \
   --post-install postinstall_script \
-  opt/solr var/solr /var/log/solr etc/solr etc/init
+  opt/solr var/solr var/log/solr etc/solr etc/init
 
 mkdir -p ../../debs
 mv *.deb ../../debs/
