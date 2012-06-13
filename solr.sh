@@ -39,20 +39,6 @@ script
 end script
 END
 
-cat > installdir/opt/solr/solr/solr.xml <<END
-<?xml version="1.0" encoding="UTF-8" ?>
-
-<solr persistent="false">
- <cores adminPath="/admin/cores">
-   <!--
-     <core name="X" instanceDir="/etc/solr/X">
-       <property name="instanceDir" value="/etc/solr/X" />
-     </core>
-   -->
- </cores>
-</solr>
-END
-
 cat > installdir/opt/solr/etc/logging.properties <<END
 .level = INFO
 handlers = java.util.logging.FileHandler
@@ -62,7 +48,16 @@ java.util.logging.FileHandler.formatter = java.util.logging.SimpleFormatter
 END
 
 cat > preinstall_script <<END
+#!/bin/bash
 adduser --system --group --no-create-home --disabled-password --disabled-login solr
+END
+
+cat > postinstall_script <<END
+#!/bin/bash
+
+for d in /opt/solr /var/solr /var/log/solr; do
+  chown -R solr:solr \$d
+done
 END
 
 for f in lib etc webapps start.jar; do
@@ -79,6 +74,7 @@ fpm \
   -a all \
   -d java6-runtime-headless \
   --pre-install preinstall_script \
+  --post-install postinstall_script \
   opt/solr var/solr etc/solr etc/init
 
 mkdir -p ../../debs
