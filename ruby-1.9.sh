@@ -5,7 +5,7 @@
 
 set -e
 
-VERSION="1.9.3-p125"
+VERSION="1.9.3-p374"
 USER_VERSION="-ts1"
 
 mkdir -p build
