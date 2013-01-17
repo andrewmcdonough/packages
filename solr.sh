@@ -1,9 +1,9 @@
 #!/bin/bash
 set -e
 
-VERSION="3.5.0"
+VERSION="3.6.2"
 USER_VERSION="-ts1"
-MIRROR="http://apache.mirror.rbftpnetworks.com/lucene/solr"
+MIRROR="http://www.mirrorservice.org/sites/ftp.apache.org/lucene/solr"
 
 mkdir -p build
 cd build
