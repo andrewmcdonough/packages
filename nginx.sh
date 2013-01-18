@@ -8,8 +8,7 @@ USER_VERSION='-ts1'
 mkdir -p build
 cd build
 
-# requires build-essential libssl-dev zlib1g-dev libpcre3-dev libxslt-dev libxml2dev
-# libgeoip-dev
+# requires build-essential libssl-dev zlib1g-dev libpcre3-dev libxslt-dev libxml2-dev libgeoip-dev
 if [ ! -d nginx-${VERSION} ]; then
   wget http://nginx.org/download/nginx-${VERSION}.tar.gz
   tar zxvf nginx-${VERSION}.tar.gz
