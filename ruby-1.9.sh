@@ -5,13 +5,14 @@
 
 set -e
 
-VERSION="1.9.3-p374"
+VERSION="1.9.3-p392"
 USER_VERSION="-ts1"
 
 mkdir -p build
 cd build
 
-# requires build-essential libssl-dev libreadline6-dev zlib1g-dev libyaml-dev libyaml-0-2
+sudo apt-get install -y build-essential libssl-dev libreadline6-dev zlib1g-dev libyaml-dev libyaml-0-2
+
 if [ ! -d ruby-${VERSION} ]; then
   wget http://ftp.ruby-lang.org/pub/ruby/1.9/ruby-${VERSION}.tar.gz
   tar zxvf ruby-${VERSION}.tar.gz
@@ -19,6 +20,7 @@ fi
 
 cd ruby-${VERSION}
 
+make clean
 ./configure \
   --prefix=/usr \
   --with-opt-dir=/usr
