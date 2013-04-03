@@ -19,3 +19,6 @@ repo/
 debs/
 build/
 *.pyc
+.vagrant
+*.asc
+s3cfg-tribesports
