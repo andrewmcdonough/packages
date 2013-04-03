@@ -15,6 +15,7 @@ tmp/**/*
 .DS_Store
 tags
 .rvmrc
-repo
-debs
-build
+repo/
+debs/
+build/
+*.pyc
