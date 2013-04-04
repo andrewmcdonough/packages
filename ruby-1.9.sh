@@ -11,7 +11,7 @@ USER_VERSION="-ts1"
 mkdir -p build
 cd build
 
-sudo apt-get install -y build-essential libssl-dev libreadline6-dev zlib1g-dev libyaml-dev libyaml-0-2
+sudo apt-get install -y build-essential libssl-dev libreadline6-dev zlib1g-dev libyaml-dev libyaml-0-2 libffi-dev libgdbm-dev
 
 if [ ! -d ruby-${VERSION} ]; then
   tarball=ruby-${VERSION}.tar.gz
@@ -25,7 +25,9 @@ cd ruby-${VERSION}
 
 ./configure \
   --prefix=/usr \
-  --with-opt-dir=/usr
+  --with-opt-dir=/usr \
+  --disable-install-doc \
+  --without-X11
 
 make clean
 make

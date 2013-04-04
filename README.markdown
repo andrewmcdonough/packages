@@ -32,7 +32,9 @@ later.
   2. Provision your chosen VM: `vagrant up`
   3. Build your chosen package(s), e.g.: `./vagrant_run.sh
      ruby-1.9.sh`
-  4. Repeat on as many different architectures as you want.
+  4. Repeat on as many different architectures as you want. You will
+     need to destroy the existing VM with `vagrant destroy` if you are
+     changing boxes.
   5. Build the repo: `./vagrant_run.sh repo.sh` (you will be prompted
      for the signing passphrase)
   6. Upload the repo `./sync.sh`
