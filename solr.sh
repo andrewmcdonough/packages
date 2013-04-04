@@ -8,6 +8,8 @@ MIRROR="http://www.mirrorservice.org/sites/ftp.apache.org/lucene/solr"
 mkdir -p build
 cd build
 
+sudo apt-get install -y curl
+
 tarball="apache-solr-$VERSION.tgz"
 if [ ! -f $tarball ]; then
   curl -O "$MIRROR/$VERSION/$tarball"

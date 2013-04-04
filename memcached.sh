@@ -8,6 +8,8 @@ USER_VERSION='-ts1'
 mkdir -p build
 cd build
 
+sudo apt-get install -y libevent-dev lsb-base perl
+
 if [ ! -d memcached-${VERSION} ]; then
   wget http://memcached.googlecode.com/files/memcached-${VERSION}.tar.gz
   tar zxvf memcached-${VERSION}.tar.gz

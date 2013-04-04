@@ -8,6 +8,8 @@ USER_VERSION="-ts1"
 mkdir -p build
 cd build
 
+sudo apt-get install -y g++ libmysqlclient-dev
+
 if [ ! -d sphinx-${VERSION} ]; then
   wget http://sphinxsearch.com/files/sphinx-${VERSION}.tar.gz
   tar -zxvf sphinx-${VERSION}.tar.gz
