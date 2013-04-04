@@ -2,10 +2,12 @@
 
 set -e
 
-cd /vagrant_share
+cat /packages/keys/id_rsa.pub >> ~vagrant/.ssh/authorized_keys
+
+cd /packages
 
 apt-key add tribesports-pubkey.asc
-sudo -u vagrant gpg --import tribesports-privkey.asc
+sudo -u vagrant -H gpg --import tribesports-privkey.asc
 
 echo 'deb http://packages.tribesports.com/ubuntu/ lucid-tribesports main' > /etc/apt/sources.list.d/tribesports.list
 

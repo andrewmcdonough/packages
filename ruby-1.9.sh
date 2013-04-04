@@ -14,16 +14,20 @@ cd build
 sudo apt-get install -y build-essential libssl-dev libreadline6-dev zlib1g-dev libyaml-dev libyaml-0-2
 
 if [ ! -d ruby-${VERSION} ]; then
-  wget http://ftp.ruby-lang.org/pub/ruby/1.9/ruby-${VERSION}.tar.gz
-  tar zxvf ruby-${VERSION}.tar.gz
+  tarball=ruby-${VERSION}.tar.gz
+  if [ ! -f $tarball ]; then
+    wget http://ftp.ruby-lang.org/pub/ruby/1.9/${tarball} -O $tarball
+  fi
+  tar zxvf $tarball
 fi
 
 cd ruby-${VERSION}
 
-make clean
 ./configure \
   --prefix=/usr \
   --with-opt-dir=/usr
+
+make clean
 make
 make install DESTDIR=installdir
 
