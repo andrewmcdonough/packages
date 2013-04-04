@@ -24,22 +24,24 @@ Workflow
 --------
 
 A Vagrantfile and provisioning script are provided to set up VMs
-to build the packages. At the moment you need to manually edit the
-Vagrantfile to switch between 32 and 64-bit VMs, I might automate this
-later.
+to build the packages. A 32-bit and 64-bit VM are provisioned and booted.
 
   1. Fetch existing packages from repo: `./fetch.sh`
-  2. Provision your chosen VM: `vagrant up`
+  2. Provision and boot the VMs: `vagrant up`
   3. Build your chosen package(s), e.g.: `./vagrant_run.sh
      ruby-1.9.sh`
-  4. Repeat on as many different architectures as you want. You will
-     need to destroy the existing VM with `vagrant destroy` if you are
-     changing boxes.
-  5. Build the repo: `./vagrant_run.sh repo.sh` (you will be prompted
+  4. Build the repo: `./vagrant_run.sh repo.sh` (you will be prompted
      for the signing passphrase)
-  6. Upload the repo `./sync.sh`
+  5. Upload the repo `./sync.sh`
 
-Done!
+By default the `vagrant_run.sh` script will run the provided command
+on both 32 and 64-bit environments. Some packages may not require
+arch-specific builds (e.g. solr, being a Java package) - if this is
+the case specify the box you would like to build on, either `x86` or
+`amd64`:
+
+    $ ./vagrant_run.sh test.sh amd64
+    Script successfully run on: Linux lucid64 2.6.32-38-server #83-Ubuntu SMP Wed Jan 4 11:26:59 UTC 2012 x86_64 GNU/Linux
 
 If you want to do this manually on some non-Vagrant-provisioned box for
 `<%= reasons %>`, check out the `server_init.sh` script to get an idea

@@ -12,6 +12,8 @@ sudo -u vagrant -H gpg --import tribesports-privkey.asc
 echo 'deb http://packages.tribesports.com/ubuntu/ lucid-tribesports main' > /etc/apt/sources.list.d/tribesports.list
 
 apt-get update
+apt-get -y install aptitude
+aptitude -y full-upgrade
 apt-get install -y make s3cmd ts-ruby
 
 gem install fpm --no-ri --no-rdoc
