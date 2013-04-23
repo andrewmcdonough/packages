@@ -23,24 +23,24 @@ You will also need the password for the signing key.
 Workflow
 --------
 
-A Vagrantfile and provisioning script are provided to set up VMs
-to build the packages. A 32-bit and 64-bit VM are provisioned and booted.
+A Vagrantfile and provisioning script are provided to set up VMs to
+build the packages. 32-bit and 64-bit VMs are provisioned and booted,
+named lucid{32,64} and precise{32,64}.
 
   1. Fetch existing packages from repo: `./fetch.sh`
   2. Provision and boot the VMs: `vagrant up`
   3. Build your chosen package(s), e.g.: `./vagrant_run.sh
      ruby-1.9.sh`
-  4. Build the repo: `./vagrant_run.sh repo.sh` (you will be prompted
+  4. Build the repo: `./vagrant_run.sh repo.sh <boxname>` (you will be prompted
      for the signing passphrase)
   5. Upload the repo `./sync.sh`
 
 By default the `vagrant_run.sh` script will run the provided command
 on both 32 and 64-bit environments. Some packages may not require
 arch-specific builds (e.g. solr, being a Java package) - if this is
-the case specify the box you would like to build on, either `x86` or
-`amd64`:
+the case specify the box you would like to build on:
 
-    $ ./vagrant_run.sh test.sh amd64
+    $ ./vagrant_run.sh test.sh lucid64
     Script successfully run on: Linux lucid64 2.6.32-38-server #83-Ubuntu SMP Wed Jan 4 11:26:59 UTC 2012 x86_64 GNU/Linux
 
 If you want to do this manually on some non-Vagrant-provisioned box for

@@ -2,6 +2,8 @@
 
 set -e
 
+source /etc/lsb-release
+
 VERSION="0.9.9"
 USER_VERSION="-ts1"
 
@@ -30,6 +32,7 @@ installdir=`cd installdir && pwd`
   --disable-debug \
   --disable-dependency-tracking \
   --with-libstemmer
+make clean
 make
 make install DESTDIR=$installdir
 
@@ -38,5 +41,5 @@ fpm -s dir -t deb -n ts-sphinx -v ${VERSION}${USER_VERSION} -C $installdir \
   -d "libc6 (>= 2.6)" \
   usr/bin usr/etc usr/var
 
-mkdir -p ../../debs
-mv *.deb ../../debs/
+mkdir -p ../../debs/${DISTRIB_CODENAME}-tribesports
+mv *.deb ../../debs/${DISTRIB_CODENAME}-tribesports

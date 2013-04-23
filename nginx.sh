@@ -2,19 +2,24 @@
 
 set -e
 
+source /etc/lsb-release
+
 VERSION='1.2.0'
 USER_VERSION='-ts1'
 
 mkdir -p build
 cd build
 
-# requires build-essential libssl-dev zlib1g-dev libpcre3-dev libxslt-dev libxml2-dev libgeoip-dev
+sudo apt-get install -y build-essential libssl-dev zlib1g-dev libpcre3-dev libxslt-dev libxml2-dev libgeoip-dev
+
 if [ ! -d nginx-${VERSION} ]; then
   wget http://nginx.org/download/nginx-${VERSION}.tar.gz
   tar zxvf nginx-${VERSION}.tar.gz
 fi
 
 cd nginx-${VERSION}
+
+rm -rf objs Makefile
 
 ./configure \
   --prefix=/etc/nginx  \
@@ -58,5 +63,5 @@ fpm -s dir -t deb -n ts-nginx -v ${VERSION}${USER_VERSION} -C installdir \
   -d "zlib1g (>= 1:1.1.4)" \
   etc/nginx var usr/sbin
 
-mkdir -p ../../debs
-mv *.deb ../../debs/
+mkdir -p ../../debs/${DISTRIB_CODENAME}-tribesports
+mv *.deb ../../debs/${DISTRIB_CODENAME}-tribesports

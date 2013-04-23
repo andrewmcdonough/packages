@@ -2,6 +2,8 @@
 
 set -e
 
+source /etc/lsb-release
+
 VERSION='1.4.13'
 USER_VERSION='-ts1'
 
@@ -19,6 +21,7 @@ cd memcached-${VERSION}
 
 ./configure --prefix=/usr
 
+make clean
 make
 make install DESTDIR=installdir
 scripts_dir=installdir/usr/share/memcached/scripts
@@ -31,5 +34,5 @@ fpm -s dir -t deb -n ts-memcached -v ${VERSION}${USER_VERSION} -C installdir \
   -d 'libevent-1.4-2 (>= 1.4.13-stable)' -d 'perl' -d 'lsb-base (>= 3.2-13)' \
   usr/bin usr/include usr/share
 
-mkdir -p ../../debs
-mv *.deb ../../debs/
+mkdir -p ../../debs/${DISTRIB_CODENAME}-tribesports
+mv *.deb ../../debs/${DISTRIB_CODENAME}-tribesports

@@ -1,6 +1,8 @@
 #!/bin/bash
 set -e
 
+source /etc/lsb-release
+
 VERSION="3.6.2"
 USER_VERSION="-ts1"
 MIRROR="http://www.mirrorservice.org/sites/ftp.apache.org/lucene/solr"
@@ -79,5 +81,5 @@ fpm \
   --post-install postinstall_script \
   opt/solr var/solr var/log/solr etc/solr etc/init
 
-mkdir -p ../../debs
-mv *.deb ../../debs/
+mkdir -p ../../debs/${DISTRIB_CODENAME}-tribesports
+mv *.deb ../../debs/${DISTRIB_CODENAME}-tribesports

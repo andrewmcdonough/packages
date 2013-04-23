@@ -5,13 +5,17 @@
 
 set -e
 
+source /etc/lsb-release
+
 VERSION="1.9.3-p392"
 USER_VERSION="-ts1"
 
 mkdir -p build
 cd build
 
-sudo apt-get install -y build-essential libssl-dev libreadline6-dev zlib1g-dev libyaml-dev libyaml-0-2 libffi-dev libgdbm-dev
+sudo apt-get install -y build-essential libssl-dev libreadline6-dev \
+  zlib1g-dev libyaml-dev libyaml-0-2 libffi-dev libgdbm-dev \
+  libncurses5-dev
 
 if [ ! -d ruby-${VERSION} ]; then
   tarball=ruby-${VERSION}.tar.gz
@@ -33,14 +37,29 @@ make clean
 make
 make install DESTDIR=installdir
 
+case "$DISTRIB_CODENAME" in
+  lucid)
+    libffi='libffi5'
+    ffi_version='>= 3.0.4'
+    ;;
+  precise)
+    libffi='libffi6'
+    ffi_version='>= 3.0.10'
+    ;;
+  *)
+    echo "Unsupported version of ubuntu"
+    exit 1
+    ;;
+esac
+
 fpm -s dir -t deb -n ts-ruby -v ${VERSION}${USER_VERSION} -C installdir \
   --provides ruby --conflicts ruby \
   -p ruby-VERSION_ARCH.deb -d "libstdc++6 (>= 4.4.3)" \
-  -d "libc6 (>= 2.6)" -d "libffi5 (>= 3.0.4)" -d "libgdbm3 (>= 1.8.3)" \
+  -d "libc6 (>= 2.6)" -d "${libffi} (${ffi_version})" -d "libgdbm3 (>= 1.8.3)" \
   -d "libncurses5 (>= 5.7)" -d "libreadline6 (>= 6.1)" \
   -d "libssl0.9.8 (>= 0.9.8)" -d "zlib1g (>= 1:1.2.2)" \
   -d "libyaml-0-2 (>= 0.1.3-1)" \
   usr/bin usr/lib usr/share/man usr/include
 
-mkdir -p ../../debs
-mv *.deb ../../debs/
+mkdir -p ../../debs/${DISTRIB_CODENAME}-tribesports
+mv *.deb ../../debs/${DISTRIB_CODENAME}-tribesports

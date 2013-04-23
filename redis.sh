@@ -2,6 +2,8 @@
 
 set -e
 
+source /etc/lsb-release
+
 VERSION='2.4.14'
 USER_VERSION='-ts1'
 
@@ -15,6 +17,7 @@ fi
 
 cd redis-${VERSION}
 
+make clean
 make
 
 # Redis's Makefile doesn't respect DESTDIR, so do all this copying manually:
@@ -36,5 +39,5 @@ fpm -s dir -t deb -n ts-redis --provides redis-server --conflicts redis-server \
   -d 'libc6 (>= 2.7)' \
   usr/bin etc/redis
 
-mkdir -p ../../debs
-mv *.deb ../../debs/
+mkdir -p ../../debs/${DISTRIB_CODENAME}-tribesports
+mv *.deb ../../debs/${DISTRIB_CODENAME}-tribesports

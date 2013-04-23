@@ -3,13 +3,13 @@
 # Shamelessly yoinked from http://github.com/alphagov/packages
 
 set -e
-DISTRIBUTIONS="lucid-tribesports"
+DISTRIBUTIONS="lucid-tribesports precise-tribesports"
 COMPONENTS="main"
 ARCHITECTURES="amd64 i386"
 
 rm -rf repo
 mkdir -p repo/pool
-cp debs/*.deb repo/pool/
+cp -R debs/* repo/pool/
 
 cd repo
 
@@ -25,7 +25,7 @@ Origin: Tribesports Ltd
 Label: Tribesports Deployment Repository
 Architecture: $arch
 END
-      dpkg-scanpackages -a $arch pool /dev/null > $path/Packages
+      dpkg-scanpackages -a $arch pool/$dist /dev/null > $path/Packages
       gzip -9c < $path/Packages > $path/Packages.gz
     done
   done
