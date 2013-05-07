@@ -11,6 +11,10 @@ Government Digital Services.
 Requirements
 ------------
 
+You need vagrant 1.2 or higher, available from
+[http://vagrantup.com](http://vagrantup.com). This is different from the
+gem; Vagrant is now distributed as a binary download.
+
 You will need the following files to sign and upload the resulting
 repository:
 
@@ -25,8 +29,7 @@ Workflow
 
 A Vagrantfile and provisioning script are provided to set up VMs to
 build the packages. 32-bit and 64-bit VMs are provisioned and booted,
-named lucid{32,64} and precise{32,64}.
-
+named lucid{32,64} and precise{32,64}. You will need 
   1. Fetch existing packages from repo: `./fetch.sh`
   2. Provision and boot the VMs: `vagrant up`
   3. Build your chosen package(s), e.g.: `./vagrant_run.sh
