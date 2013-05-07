@@ -4,7 +4,7 @@ set -e
 
 source /etc/lsb-release
 
-VERSION='1.2.0'
+VERSION='1.5.0'
 USER_VERSION='-ts1'
 
 mkdir -p build

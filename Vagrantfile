@@ -1,7 +1,7 @@
 # -*- mode: ruby -*-
 # vi: set ft=ruby :
 
-Vagrant::Config.run do |config|
+Vagrant.configure("1") do |config|
 
   config.vm.define :lucid32 do |x86_config|
     x86_config.vm.box     = "10.04-32"

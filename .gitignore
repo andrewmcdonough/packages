@@ -22,3 +22,4 @@ build/
 .vagrant
 *.asc
 s3cfg-tribesports
+.vagrant.*
