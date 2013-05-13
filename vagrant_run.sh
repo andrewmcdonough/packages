@@ -2,7 +2,7 @@
 
 set -e
 
-usage="usage: ./vagrant_run.sh SCRIPT [TARGET (lucid32|lucid64|precise32|precise64)]"
+usage="usage: ./vagrant_run.sh SCRIPT [TARGET (precise32|precise64)]"
 
 script=$1
 if [ ! -n "$script" ]; then
@@ -11,20 +11,14 @@ if [ ! -n "$script" ]; then
 fi
 
 case "$2" in
-  lucid32)
+  precise32)
     ports='2222'
     ;;
-  lucid64)
+  precise64)
     ports='2223'
     ;;
-  precise32)
-    ports='2224'
-    ;;
-  precise64)
-    ports='2225'
-    ;;
   '')
-    ports='2222 2223 2224 2225'
+    ports='2222 2223'
     ;;
   *)
     echo $usage

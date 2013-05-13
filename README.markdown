@@ -65,14 +65,21 @@ that the script will be run as a user with password-free sudo access.
 Using the repo
 --------------
 
-You will need the public key as above, and must tell `apt` about it thusly:
+Import the public key:
 
-    $ sudo apt-key add tribesports-pubkey.asc
+    $ gpg --keyserver pgp.mit.edu --recv-keys D07E8C22
+    $ gpg --export --armor D07E8C22 | apt-key add -
 
-Then add the repo to your sources:
+Then add the repo to your sources by adding the following line in the
+file `/etc/apt/sources.d/tribesports.list`:
 
-    deb http://packages.tribesports.com/ubuntu lucid-tribesports main
+    deb http://packages.tribesports.com/ubuntu precise-tribesports main
+
+(Adjust the Ubuntu release codename appropriately if you are using an
+earlier version of Ubuntu).
 
 Finally, update apt:
 
     $ sudo apt-get update
+
+And install whatever packages you need.

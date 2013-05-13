@@ -15,6 +15,6 @@ apt-get update
 apt-get -y install aptitude
 # Conditional stuff here to handle 10.04/12.04
 DEBIAN_FRONTEND=noninteractive aptitude -y -o Dpkg::Options::="--force-confdef" -o Dpkg::Options::="--force-confold" full-upgrade
-apt-get install -y make s3cmd ruby1.9.3
+apt-get install -y make s3cmd ts-ruby
 
 gem install fpm --no-ri --no-rdoc
