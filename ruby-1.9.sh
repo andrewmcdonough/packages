@@ -8,7 +8,7 @@ set -e
 source /etc/lsb-release
 
 VERSION="1.9.3-p392"
-USER_VERSION="-ts1"
+USER_VERSION="-ts2"
 
 mkdir -p build
 cd build
@@ -53,7 +53,7 @@ case "$DISTRIB_CODENAME" in
 esac
 
 fpm -s dir -t deb -n ts-ruby -v ${VERSION}${USER_VERSION} -C installdir \
-  --provides ruby --conflicts ruby \
+  --provides ruby --provides ruby1.9.3 --conflicts ruby --conflicts ruby1.9.3 \
   -p ruby-VERSION_ARCH.deb -d "libstdc++6 (>= 4.4.3)" \
   -d "libc6 (>= 2.6)" -d "${libffi} (${ffi_version})" -d "libgdbm3 (>= 1.8.3)" \
   -d "libncurses5 (>= 5.7)" -d "libreadline6 (>= 6.1)" \
