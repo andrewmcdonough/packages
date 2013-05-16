@@ -20,7 +20,7 @@ apt-get update
 apt-get -y install aptitude
 # Junk necessary to get a properly non-interactive upgrade
 DEBIAN_FRONTEND=noninteractive aptitude -y -o Dpkg::Options::="--force-confdef" -o Dpkg::Options::="--force-confold" full-upgrade
-apt-get install -y s3cmd ruby1.9.3 dpkg-dev
+apt-get install -y ruby1.9.3 dpkg-dev
 
 gem install fpm --no-ri --no-rdoc
 
