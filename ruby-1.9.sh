@@ -7,8 +7,23 @@ set -e
 
 source /etc/lsb-release
 
-VERSION="1.9.3-p392"
-USER_VERSION="-ts2"
+VERSION="1.9.3-p429"
+USER_VERSION="-ts1"
+
+case "$DISTRIB_CODENAME" in
+  lucid)
+    libffi='libffi5'
+    ffi_version='>= 3.0.4'
+    ;;
+  precise)
+    libffi='libffi6'
+    ffi_version='>= 3.0.10'
+    ;;
+  *)
+    echo "Unsupported version of ubuntu"
+    exit 1
+    ;;
+esac
 
 mkdir -p build
 cd build
@@ -36,21 +51,6 @@ cd ruby-${VERSION}
 make clean
 make
 make install DESTDIR=installdir
-
-case "$DISTRIB_CODENAME" in
-  lucid)
-    libffi='libffi5'
-    ffi_version='>= 3.0.4'
-    ;;
-  precise)
-    libffi='libffi6'
-    ffi_version='>= 3.0.10'
-    ;;
-  *)
-    echo "Unsupported version of ubuntu"
-    exit 1
-    ;;
-esac
 
 fpm -s dir -t deb -n ts-ruby -v ${VERSION}${USER_VERSION} -C installdir \
   --provides ruby --provides ruby1.9.3 --conflicts ruby --conflicts ruby1.9.3 \
