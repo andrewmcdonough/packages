@@ -18,7 +18,7 @@ EOF
 # Upgrade the HECK out of things.
 apt-get update
 apt-get -y install aptitude
-# Conditional stuff here to handle 10.04/12.04
+# Junk necessary to get a properly non-interactive upgrade
 DEBIAN_FRONTEND=noninteractive aptitude -y -o Dpkg::Options::="--force-confdef" -o Dpkg::Options::="--force-confold" full-upgrade
 apt-get install -y s3cmd ruby1.9.3 dpkg-dev
 
