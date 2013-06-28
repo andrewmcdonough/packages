@@ -3,6 +3,9 @@
 
 Vagrant.configure("2") do |config|
 
+  config.cache.enable :apt
+  config.cache.enable :gem
+
   config.vm.define :precise32 do |vm_config|
     vm_config.vm.box     = "12.04-32"
     vm_config.vm.box_url = "http://files.vagrantup.com/precise32.box"
