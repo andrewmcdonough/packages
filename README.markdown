@@ -44,7 +44,7 @@ on both 32 and 64-bit environments. Some packages may not require
 arch-specific builds (e.g. solr, being a Java package) - if this is
 the case specify the box you would like to build on:
 
-    $ ./vagrant_run.sh solr.sh lucid64
+    $ ./vagrant_run.sh solr.sh precise64
 
 If you want to do this manually on some non-Vagrant-provisioned box for
 `<%= reasons %>`, check out the `server_init.sh` script to get an idea
