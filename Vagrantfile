@@ -7,12 +7,12 @@ Vagrant.configure("2") do |config|
   config.cache.enable :gem
 
   config.vm.define :precise32 do |vm_config|
-    vm_config.vm.box     = "12.04-32"
+    vm_config.vm.box     = "precise32"
     vm_config.vm.box_url = "http://files.vagrantup.com/precise32.box"
   end
 
   config.vm.define :precise64 do |vm_config|
-    vm_config.vm.box     = "12.04-64"
+    vm_config.vm.box     = "precise64"
     vm_config.vm.box_url = "http://files.vagrantup.com/precise64.box"
   end
 
