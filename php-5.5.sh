@@ -39,8 +39,6 @@ make clean
 make
 INSTALL_ROOT=installdir make install 
 
-
-
 fpm -s dir -t deb -n ts-php5 -v ${VERSION}${USER_VERSION} -C installdir \
   --provides php --provides php5 --conflicts php --conflicts php5 \
   -p php-VERSION_ARCH.deb \
@@ -49,3 +47,5 @@ fpm -s dir -t deb -n ts-php5 -v ${VERSION}${USER_VERSION} -C installdir \
   -d "libmcrypt-dev (>= 2.5.8)" \
   usr/bin usr/etc usr/include usr/lib usr/share
 
+mkdir -p ../../debs/${DISTRIB_CODENAME}-tribesports
+mv *.deb ../../debs/${DISTRIB_CODENAME}-tribesports
