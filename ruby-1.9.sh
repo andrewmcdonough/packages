@@ -7,7 +7,7 @@ set -e
 
 source /etc/lsb-release
 
-VERSION="1.9.3-p448"
+VERSION="1.9.3-p484"
 USER_VERSION="-ts1"
 
 case "$DISTRIB_CODENAME" in
@@ -35,7 +35,7 @@ sudo apt-get install -y build-essential libssl-dev libreadline6-dev \
 if [ ! -d ruby-${VERSION} ]; then
   tarball=ruby-${VERSION}.tar.gz
   if [ ! -f $tarball ]; then
-    wget http://ftp.ruby-lang.org/pub/ruby/1.9/${tarball} -O $tarball
+    wget http://cache.ruby-lang.org/pub/ruby/${tarball} -O $tarball
   fi
   tar zxvf $tarball
 fi
