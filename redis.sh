@@ -4,14 +4,14 @@ set -e
 
 source /etc/lsb-release
 
-VERSION='2.4.14'
+VERSION='2.8.2'
 USER_VERSION='-ts1'
 
 mkdir -p build
 cd build
 
 if [ ! -d redis-${VERSION} ]; then
-  wget http://redis.googlecode.com/files/redis-${VERSION}.tar.gz
+  wget http://download.redis.io/releases/redis-${VERSION}.tar.gz
   tar -zxvf redis-${VERSION}.tar.gz
 fi
 
