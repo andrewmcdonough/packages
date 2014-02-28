@@ -7,7 +7,7 @@ set -e
 
 source /etc/lsb-release
 
-VERSION="2.0.0-p451"
+VERSION="2.1.1"
 USER_VERSION="-ts1"
 
 case "$DISTRIB_CODENAME" in
@@ -35,7 +35,7 @@ sudo apt-get install -y build-essential libssl-dev libreadline6-dev \
 if [ ! -d ruby-${VERSION} ]; then
   tarball=ruby-${VERSION}.tar.gz
   if [ ! -f $tarball ]; then
-    wget http://cache.ruby-lang.org/pub/ruby/2.0/${tarball} -O $tarball
+    wget http://cache.ruby-lang.org/pub/ruby/2.1/${tarball} -O $tarball
   fi
   tar zxvf $tarball
 fi
@@ -52,9 +52,9 @@ make clean
 make
 make install DESTDIR=installdir
 
-fpm -s dir -t deb -n ts-ruby2.0 -v ${VERSION}${USER_VERSION} -C installdir \
+fpm -s dir -t deb -n ts-ruby2.1 -v ${VERSION}${USER_VERSION} -C installdir \
   --provides ruby --provides ruby1.9.3 --conflicts ruby --conflicts ruby1.9.3 \
-  --conflicts ts-ruby \
+  --conflicts ts-ruby --conflicts ts-ruby2.0 \
   -p ruby-VERSION_ARCH.deb -d "libstdc++6 (>= 4.4.3)" \
   -d "libc6 (>= 2.6)" -d "${libffi} (${ffi_version})" -d "libgdbm3 (>= 1.8.3)" \
   -d "libncurses5 (>= 5.7)" -d "libreadline6 (>= 6.1)" \

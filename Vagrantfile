@@ -16,5 +16,5 @@ Vagrant.configure("2") do |config|
     vm_config.vm.box_url = "http://files.vagrantup.com/precise64.box"
   end
 
-  config.vm.provision :shell, :path => "server_init.sh"
+  config.vm.provision :shell, :path => "bootstrap_server"
 end

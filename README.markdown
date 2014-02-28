@@ -32,19 +32,19 @@ A Vagrantfile and provisioning script are provided to set up VMs to
 build the packages. 32-bit and 64-bit VMs are provisioned and booted,
 named precise{32,64}. To build a package, follow these steps:
 
-  1. `$ ./fetch.sh` - Fetch existing packages from repo
+  1. `$ ./fetch_repo` - Fetch existing packages from repo
   2. `$ vagrant up` - create, boot and provision the VMS
-  3. `$ ./vagrant_run.sh <package_script>` - Build your chosen package(s)
-  4. `./vagrant_run.sh repo.sh <boxname>` Build the repo (you will be prompted
+  3. `$ ./vagrant_run <package_script>` - Build your chosen package(s)
+  4. `./vagrant_run build_repo <boxname>` Build the repo (you will be prompted
      for the signing passphrase)
-  5. `./sync.sh` - upload the repo to the S3 bucket
+  5. `./push_repo` - upload the repo to the S3 bucket
 
 By default the `vagrant_run.sh` script will run the provided command
 on both 32 and 64-bit environments. Some packages may not require
 arch-specific builds (e.g. solr, being a Java package) - if this is
 the case specify the box you would like to build on:
 
-    $ ./vagrant_run.sh solr.sh precise64
+    $ ./vagrant_run runners/solr precise64
 
 If you want to do this manually on some non-Vagrant-provisioned box for
 `<%= reasons %>`, check out the `server_init.sh` script to get an idea
