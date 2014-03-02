@@ -1,8 +1,9 @@
 #!/bin/bash
 
 set -e
+set -x
 
-usage="usage: ./vagrant_run.sh SCRIPT [TARGET (precise32|precise64)]"
+usage="usage: ${0} <script>"
 
 script=$1
 if [[ ! -n "$script" ]]; then
@@ -10,12 +11,10 @@ if [[ ! -n "$script" ]]; then
   exit 1
 fi
 
-target=$2
-if [[ ! -n "$target" ]]; then
-  target='precise32 precise64'
+if [[ ! -f "$script" || ! -x "$script" ]]; then
+  echo "${script} is not an executable regular file"
+  exit 1
 fi
 
-for box in $target; do
-  echo "Running ${script} on ${box}..."
-  vagrant ssh $box -- -t "cd /vagrant && ./${script}"
-done
+echo "Running ${script} on ${box}..."
+vagrant ssh precise64 -- -t "cd /vagrant && ./${script}"
