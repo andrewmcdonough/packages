@@ -4,7 +4,7 @@ set -e
 
 source /etc/lsb-release
 
-VERSION='2.8.2'
+VERSION='2.8.7'
 USER_VERSION='-ts1'
 
 mkdir -p build
@@ -32,11 +32,31 @@ for prog in server benchmark cli check-dump check-aof; do
   cp -pf src/redis-${prog} $BIN_DIR/
 done
 
+cat > preinstall_script <<END
+#!/bin/bash
+adduser --system --group --no-create-home --disabled-password --disabled-login redis
+END
+
+cat > postinstall_script <<END
+#!/bin/bash
+mkdir -p /var/lib/redis
+chown -R redis:redis /var/lib/redis
+END
+
 cp -pf redis.conf $CONF_DIR/
 
-fpm -s dir -t deb -n ts-redis --provides redis-server --conflicts redis-server \
-  -v ${VERSION}${USER_VERSION} -p redis-server-VERSION_ARCH.deb -C $INSTALLDIR \
+fpm \
+  -s dir \
+  -t deb \
+  -n ts-redis \
+  --provides redis-server \
+  --conflicts redis-server \
+  -v ${VERSION}${USER_VERSION} \
+  -p redis-server-VERSION_ARCH.deb \
+  -C $INSTALLDIR \
   -d 'libc6 (>= 2.7)' \
+  --pre-install preinstall_script \
+  --post-install postinstall_script \
   usr/bin etc/redis
 
 mkdir -p ../../debs/${DISTRIB_CODENAME}-tribesports
