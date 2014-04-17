@@ -1,0 +1,32 @@
+#!/bin/bash
+
+set -e
+
+VERSION="0.3.8"
+USER_VERSION="-ts1"
+
+source /etc/lsb-release
+
+mkdir -p build
+cd build
+
+tarball=chruby-${VERSION}.tar.gz
+tarball_download=https://github.com/postmodern/chruby/archive/v${VERSION}.tar.gz
+
+if [[ ! -d "chruby-${VERSION}" ]]; then
+  if [[ ! -f "$tarball" ]]; then
+    wget $tarball_download -O $tarball
+  fi
+  tar zxvf $tarball
+fi
+
+cd chruby-${VERSION}
+
+make install PREFIX=$(pwd -P)/installdir/usr/local
+
+fpm -s dir -t deb -n ts-chruby -v ${VERSION}${USER_VERSION} -C installdir \
+  --provides chruby \
+  usr/local/bin usr/local/share
+
+mkdir -p ../../debs/${DISTRIB_CODENAME}-tribesports
+mv *.deb ../../debs/${DISTRIB_CODENAME}-tribesports

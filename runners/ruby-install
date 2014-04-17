@@ -1,0 +1,32 @@
+#!/bin/bash
+
+set -e
+
+VERSION="0.4.1"
+USER_VERSION="-ts1"
+
+source /etc/lsb-release
+
+mkdir -p build
+cd build
+
+tarball=ruby-install-${VERSION}.tar.gz
+tarball_download=https://github.com/postmodern/ruby-install/archive/v${VERSION}.tar.gz
+
+if [[ ! -d "ruby-install-${VERSION}" ]]; then
+  if [[ ! -f "$tarball" ]]; then
+    wget $tarball_download -O $tarball
+  fi
+  tar zxvf $tarball
+fi
+
+cd ruby-install-${VERSION}
+
+make install PREFIX=$(pwd -P)/installdir/usr/local
+
+fpm -s dir -t deb -n ts-ruby-install -v ${VERSION}${USER_VERSION} -C installdir \
+  --provides ruby-install \
+  usr/local/bin usr/local/share
+
+mkdir -p ../../debs/${DISTRIB_CODENAME}-tribesports
+mv *.deb ../../debs/${DISTRIB_CODENAME}-tribesports

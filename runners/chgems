@@ -1,0 +1,32 @@
+#!/bin/bash
+
+set -e
+
+VERSION="0.3.2"
+USER_VERSION="-ts1"
+
+source /etc/lsb-release
+
+mkdir -p build
+cd build
+
+tarball=chgems-${VERSION}.tar.gz
+tarball_download=https://github.com/postmodern/chgems/archive/v${VERSION}.tar.gz
+
+if [[ ! -d "chgems-${VERSION}" ]]; then
+  if [[ ! -f "$tarball" ]]; then
+    wget $tarball_download -O $tarball
+  fi
+  tar zxvf $tarball
+fi
+
+cd chgems-${VERSION}
+
+make install PREFIX=$(pwd -P)/installdir/usr/local
+
+fpm -s dir -t deb -n ts-chgems -v ${VERSION}${USER_VERSION} -C installdir \
+  --provides chgems \
+  usr/local/bin usr/local/share
+
+mkdir -p ../../debs/${DISTRIB_CODENAME}-tribesports
+mv *.deb ../../debs/${DISTRIB_CODENAME}-tribesports
