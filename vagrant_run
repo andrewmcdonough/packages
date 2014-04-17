@@ -1,7 +1,6 @@
 #!/bin/bash
 
 set -e
-set -x
 
 usage="usage: ${0} <script>"
 
@@ -16,5 +15,5 @@ if [[ ! -f "$script" || ! -x "$script" ]]; then
   exit 1
 fi
 
-echo "Running ${script} on ${box}..."
+echo "Running ${script}..."
 vagrant ssh precise64 -- -t "cd /vagrant && ./${script}"
