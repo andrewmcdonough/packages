@@ -71,12 +71,14 @@ done
 fpm \
   -s dir \
   -t deb \
-  -n ts-solr \
-  -p solr-VERSION_ARCH.deb \
+  -n ts-solr-java7 \
+  --provides ts-solr \
+  --conflicts ts-solr \
+  -p ts-solr-java7-VERSION_ARCH.deb \
   -v $VERSION${USER_VERSION} \
   -C installdir \
   -a all \
-  -d java6-runtime-headless \
+  -d openjdk-7-jre-headless \
   --pre-install preinstall_script \
   --post-install postinstall_script \
   opt/solr var/solr var/log/solr etc/solr etc/init
