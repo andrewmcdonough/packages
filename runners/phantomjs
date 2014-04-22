@@ -1,0 +1,43 @@
+#!/bin/bash
+
+set -e
+set -x
+
+source /etc/lsb-release
+
+VERSION='1.9.7'
+USER_VERSION='-ts1'
+
+mkdir -p build
+cd build
+
+bundle_dir=phantomjs-${VERSION}-linux-x86_64
+tarball=${bundle_dir}.tar.bz2
+
+if [[ ! -d "$bundle_dir" ]]; then
+  if [[ ! -f "$tarball" ]]; then
+    wget https://bitbucket.org/ariya/phantomjs/downloads/$tarball
+  fi
+  tar jxvf $tarball
+fi
+
+cd $bundle_dir
+
+mkdir -p installdir/usr/local/bin
+
+cp bin/phantomjs installdir/usr/local/bin/
+
+fpm \
+  -s dir \
+  -t deb \
+  -n ts-phantomjs \
+  --provides phantomjs \
+  --conflicts phantomjs \
+  -v ${VERSION}${USER_VERSION} \
+  -p ts-phantomjs-VERSION_ARCH.deb \
+  -C installdir \
+  -d 'libfontconfig1' \
+  usr/local/bin
+
+mkdir -p ../../debs/${DISTRIB_CODENAME}-tribesports
+mv *.deb ../../debs/${DISTRIB_CODENAME}-tribesports
