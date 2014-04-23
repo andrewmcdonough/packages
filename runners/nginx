@@ -4,8 +4,8 @@ set -e
 
 source /etc/lsb-release
 
-VERSION='1.5.0'
-USER_VERSION='-ts1'
+VERSION='1.5.13'
+USER_VERSION='-ts2'
 
 mkdir -p build
 cd build
@@ -54,13 +54,30 @@ make
 make install DESTDIR=installdir
 mkdir -p installdir/var/lib/nginx
 
+cat > preinstall_script <<END
+#!/bin/bash
+if [[ -f /etc/nginx/nginx.conf ]]; then
+  cp /etc/nginx/nginx.conf{,.bak}
+fi
+END
+
+cat > postinstall_script <<END
+#!/bin/bash
+if [[ -f /etc/nginx/nginx.conf.bak ]]; then
+  mv /etc/nginx/nginx.conf{.bak,}
+fi
+service nginx restart
+END
+
 fpm -s dir -t deb -n ts-nginx -v ${VERSION}${USER_VERSION} -C installdir \
   --provides nginx --conflicts nginx \
   -p nginx-VERSION_ARCH.deb \
   -d "libc6 (>= 2.10)" -d "libgeoip1 (>= 1.4.6.dfsg)" \
-  -d "libpcre3 (>= 7.7)" -d "libssl0.9.8 (>= 0.9.8k-1)" \
+  -d "libpcre3 (>= 7.7)" -d "libssl1.0.0" \
   -d "libxml2 (>= 2.7.4)" -d "libxslt1.1 (>= 1.1.18)" \
   -d "zlib1g (>= 1:1.1.4)" \
+  --pre-install preinstall_script \
+  --post-install postinstall_script \
   etc/nginx var usr/sbin
 
 mkdir -p ../../debs/${DISTRIB_CODENAME}-tribesports
