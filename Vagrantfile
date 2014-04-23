@@ -3,8 +3,9 @@
 
 Vagrant.configure("2") do |config|
 
-  config.cache.enable :apt
-  config.cache.enable :gem
+  if Vagrant.has_plugin?("vagrant-cachier")
+    config.cache.scope = :box
+  end
 
   config.vm.define :precise64 do |vm_config|
     vm_config.vm.box     = "precise64"
