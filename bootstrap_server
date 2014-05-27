@@ -12,8 +12,6 @@ cd /vagrant
 apt-key add tribesports-pubkey.asc
 sudo -u vagrant -H gpg --import tribesports-privkey.asc || true
 
-cat /vagrant/keys/id_rsa.pub >> ~vagrant/.ssh/authorized_keys
-
 # Upgrade the HECK out of things.
 apt-get update
 apt-get -y install aptitude
