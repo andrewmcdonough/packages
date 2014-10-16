@@ -1,0 +1,43 @@
+#!/bin/bash
+
+set -euo pipefail
+
+source /etc/lsb-release
+
+VERSION="0.10.32"
+USER_VERSION="-ts1"
+
+mkdir -p build
+cd build
+
+if [[ ! -d node-v${VERSION} ]]; then
+  tarball=node-v${VERSION}.tar.gz
+  if [[ ! -f "$tarball" ]]; then
+    wget http://nodejs.org/dist/v${VERSION}/node-v${VERSION}.tar.gz
+  fi
+  tar zxvf $tarball
+fi
+
+cd node-v${VERSION}
+
+./configure \
+  --prefix=/usr
+
+# make clean
+make
+make install DESTDIR=installdir
+
+fpm \
+  -s dir \
+  -t deb \
+  -n ts-nodejs \
+  -v ${VERSION}${USER_VERSION} \
+  -C installdir \
+  --provides nodejs \
+  --conflicts nodejs \
+  -p ts-nodejs-VERSION_ARCH.deb \
+  -d "libssl1.0.0" \
+  usr/bin usr/include usr/lib usr/share
+
+mkdir -p ../../debs/${DISTRIB_CODENAME}-tribesports
+mv *.deb ../../debs/${DISTRIB_CODENAME}-tribesports
